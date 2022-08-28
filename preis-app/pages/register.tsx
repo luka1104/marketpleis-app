@@ -6,7 +6,7 @@ const Register = () => {
     if (session) {
       return (
         <>
-          Signed in as<br />
+          Signed in as {session.user?.name}<br />
           <button onClick={() => signOut()}>Sign out</button>
         </>
       )
