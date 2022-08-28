@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSession, signIn, signOut } from "next-auth/react"
 
-const register = () => {
+const Register = () => {
     const { data: session } = useSession()
     if (session) {
       return (
@@ -19,4 +19,4 @@ const register = () => {
     )
 }
 
-export default register
+export default Register
