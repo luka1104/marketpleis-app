@@ -1,13 +1,10 @@
 import { ChakraProvider } from '@chakra-ui/react'
-import { SessionProvider } from "next-auth/react"
+import { SessionProvider } from 'next-auth/react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import type { AppProps } from 'next/app'
 
-function MyApp({ 
-  Component, 
-  pageProps: { session, ...pageProps },
- }: AppProps) {
+function MyApp({ Component, pageProps: { session, ...pageProps } }: AppProps) {
   return (
     <SessionProvider session={session}>
       <ChakraProvider>
