@@ -2,8 +2,12 @@ import React, { useState } from 'react'
 import type { GetServerSideProps } from "next";
 import { useSession, signIn, signOut } from "next-auth/react"
 import { useRouter } from "next/router";
-import { getRequestInstance } from "../modules/request";
 import prisma from '../lib/prisma'
+import { 
+  Input,
+  Button
+} from '@chakra-ui/react'
+import Navbar from '../src/components/navbar'
 
 type Props = {
   user: any;
@@ -27,21 +31,21 @@ const Login = (props: any) => {
   console.log(props.user);
   const router = useRouter();
   if (session) {
-    if(!props?.user?.mobile) {
+    if(!currentUser.mobile) {
       console.log("no mobile");
       router.push('/twoFactorAuth')
+    } else {
+      router.push('/mypage')
     }
     return (
       <>
-        Signed in as {session.user?.name}<br />
-        <button onClick={() => signOut()}>Sign out</button>
+        <Navbar />
       </>
     )
   }
   return (
       <>
-          Not signed in <br />
-          <button onClick={() => signIn()}>Sign in</button>
+          <Navbar />
       </>
   )
 }
