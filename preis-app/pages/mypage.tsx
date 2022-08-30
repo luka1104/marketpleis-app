@@ -12,7 +12,7 @@ const mypage = () => {
         <>
             <Navbar />
             MyPage!!
-            Signed in as {session?.user?.name}<br />
+            Signed in as {session?.user?.email}<br />
         </>
     )
 }
