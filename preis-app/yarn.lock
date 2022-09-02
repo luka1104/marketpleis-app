@@ -2823,6 +2823,11 @@
     "type-check" "^0.4.0"
     "word-wrap" "^1.2.3"
 
+"otp-generator@^4.0.0":
+  "integrity" "sha512-P0nG+RVCRDkZdEjXgoMeOTVF3jwMShAk8qYYNx+VNdWgxhcLbZQjdx3GfzgRTZENTx+9I14XfTDJZjKQJdBcVw=="
+  "resolved" "https://registry.npmjs.org/otp-generator/-/otp-generator-4.0.0.tgz"
+  "version" "4.0.0"
+
 "p-limit@^3.0.2":
   "integrity" "sha512-TYOanM3wGwNGsZN2cVTYPArw454xnXj5qmWF1bEoAc4+cU/ol7GVh7odevjp1FNHduHc3KZMcFduxU5Xc6uJRQ=="
   "resolved" "https://registry.npmjs.org/p-limit/-/p-limit-3.1.0.tgz"
