@@ -1,5 +1,5 @@
 import { ChakraProvider } from '@chakra-ui/react'
-import { SessionProvider } from 'next-auth/react';
+import { SessionProvider } from '../sdk/next-auth/react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import type { AppProps } from 'next/app'

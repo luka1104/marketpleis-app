@@ -1,9 +1,7 @@
 import NextAuth from "../../../sdk/next-auth"
-import GoogleProvider from "next-auth/providers/google"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
 import prisma from '../../../lib/prisma'
-import EmailProvider from 'next-auth/providers/email';
-import { redirect } from "next/dist/server/api-utils"
+import EmailProvider from '../../../sdk/next-auth/providers/email';
 import otpGenerator from 'otp-generator'
 
 const options = {
