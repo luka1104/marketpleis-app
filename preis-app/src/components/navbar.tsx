@@ -9,7 +9,7 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession, signIn, signOut } from "../../sdk/next-auth/react"
 import Router from 'next/router'
 
 const Navbar = () => {
