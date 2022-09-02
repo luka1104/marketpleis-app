@@ -4,47 +4,47 @@ datasource db {
 }
 
 generator client {
-  provider        = "prisma-client-js"
-}
-
-model Account {
-  id                 String  @id @default(cuid())
-  userId             String
-  type               String
-  provider           String
-  providerAccountId  String
-  refresh_token      String?
-  access_token       String?
-  expires_at         Int?
-  token_type         String?
-  scope              String?
-  id_token           String?
-  session_state      String?
-  oauth_token_secret String?
-  oauth_token        String?
-
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
-
-  @@unique([provider, providerAccountId])
+  provider = "prisma-client-js"
 }
 
 model Session {
-  id           String   @id @default(cuid())
+  id           Int      @id @default(autoincrement())
   sessionToken String   @unique
-  userId       String
+  userId       Int
   expires      DateTime
   user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model User {
-  id            String    @id @default(cuid())
+  id            Int       @id @default(autoincrement())
   name          String?
   email         String?   @unique
   emailVerified DateTime?
   image         String?
-  mobile        String?   @unique
-  accounts      Account[]
+  isAdmin       Boolean   @default(false)
+  isCompany     Boolean   @default(false)
   sessions      Session[]
+  items         Item[]
+  wallet        Wallet?
+}
+
+model Wallet {
+  id         Int    @id @default(autoincrement())
+  publicKey  String
+  privateKey String
+  mnemonic   String
+  userId     Int    @unique
+  user       User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Item {
+  id     Int     @id @default(autoincrement())
+  userId Int
+  name   String?
+  image  String?
+  price  String?
+  amount String?
+  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
