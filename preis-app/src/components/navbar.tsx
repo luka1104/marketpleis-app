@@ -10,10 +10,9 @@ import {
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 import { useSession, signIn, signOut } from "next-auth/react"
-import { useRouter } from 'next/router'
+import Router from 'next/router'
 
 const Navbar = () => {
-    const router = useRouter()
     const { data: session } = useSession();
     const { colorMode, toggleColorMode } = useColorMode();
 
@@ -21,14 +20,14 @@ const Navbar = () => {
         <>
             <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
             <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-                <Box><Text>Interact Test</Text></Box>
+                <Box><Text>Market Preis</Text></Box>
 
                 <Flex alignItems={'center'}>
                 <Stack direction={'row'} spacing={7}>
                     {session ? (
                         <Button onClick={() => {
                             signOut()
-                            router.push('/login')
+                            Router.push('/signin')
                         }}>
                             SignOut
                         </Button>
