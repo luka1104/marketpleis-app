@@ -4,6 +4,10 @@ import {
     PinInput,
     PinInputField,
     HStack,
+    useColorModeValue,
+    Box,
+    Text,
+    Stack,
 } from '@chakra-ui/react'
 import prisma from '../lib/prisma'
 import Navbar from '../src/components/navbar'
@@ -44,16 +48,46 @@ const VerifyEmailCode = (props: any) => {
     return (
         <>
             <Navbar />
-            <HStack>
-                <PinInput value={value} onChange={handlePinChange} onComplete={handleOTP}>
-                    <PinInputField />
-                    <PinInputField />
-                    <PinInputField />
-                    <PinInputField />
-                    <PinInputField />
-                    <PinInputField />
-                </PinInput>
-            </HStack>
+            <Box
+              bg={useColorModeValue('gray.100', 'gray.900')}
+              w={{ base: '90%', md: '60%', lg: '40%' }}
+              ml="auto"
+              mr="auto"
+              mt="50px"
+              borderRadius="10px"
+            >
+              <Stack spacing={4} p="3%">
+              <Text
+                fontSize="25px"
+                fontWeight="bolder"
+                textAlign={'center'}
+              >
+                Check your email for a code
+              </Text>
+              <Text textAlign="center">We’ve sent a 6-character code to</Text>
+              <Text fontWeight="medium" as="span" textAlign="center">{router.query.email}</Text>
+              <Text as="span" textAlign="center">The code expires shortly, so please enter it soon.</Text>
+                <HStack alignSelf={'center'}>
+                    <PinInput
+                      value={value}
+                      onChange={handlePinChange}
+                      onComplete={handleOTP}
+                      size='lg'
+                    >
+                        <PinInputField />
+                        <PinInputField />
+                        <PinInputField />
+                        <PinInputField />
+                        <PinInputField />
+                        <PinInputField />
+                    </PinInput>
+                </HStack>
+                <Text fontSize="13px" textAlign="center">
+                  Can’t find your code? Check your spam folder!
+                </Text>
+              </Stack>
+            </Box>
+
         </>
     )
 }
