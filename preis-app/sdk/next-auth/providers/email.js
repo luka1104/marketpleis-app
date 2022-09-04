@@ -116,9 +116,9 @@ function html(params) {
       </td>
     </tr>
     <tr>
-      <td align="center" 
-        style="background: #f5f4f5; border-radius: 4px; padding: 43px 23px; margin-left: 50px; margin-right: 50px; margin-bottom: 30px; ${color.text};">
-        <text style="text-align: center; vertical-align: middle; font-size: 30px;">${token}</text>
+      <td align="center"
+        style="background: #f5f4f5; border-radius: 4px; padding: 43px 23px; font-size: 30px; line-height: 22px; font-family: Helvetica, Arial, sans-serif; color: ${color.text};">
+        ${token}
       </td>
     </tr>
     <tr>
