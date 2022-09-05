@@ -11,6 +11,8 @@ const nextConfig = {
     ENVIRONMENT: process.env.ENVIRONMENT,
     EMAIL_SERVER: process.env.EMAIL_SERVER,
     EMAIL_FROM: process.env.EMAIL_FROM,
+    SUPABASE_URL: process.env.SUPABASE_URL,
+    SUPABASE_ANON_KEY: process.env.SUPABASE_ANON_KEY
   },
 }
 
