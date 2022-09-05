@@ -138,8 +138,8 @@ const AddItems = () => {
                 className="sr-only"
                 accept="image/png, image/jpeg"
                 onChange={(e) => {
-                  const filiList = e.target?.files;
-                  handleUploadStorage(filiList);
+                  const fileList = e.target?.files;
+                  handleUploadStorage(fileList);
                 }}
               />
             </label>
