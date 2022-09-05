@@ -25,7 +25,9 @@ export default function SignIn({ csrfToken }) {
           borderRadius="10px"
         >
           <Stack spacing={4} p="3%">
-            <Text fontWeight="bold" fontSize="22px" textAlign="center">Sign In or Sign up with Email</Text>
+            <Text fontWeight="bold" fontSize="22px" textAlign="center">
+              Sign In or Sign up with Email
+            </Text>
             <form method="post" action="/api/auth/signin/email">
                 <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
                 <Box w={{ base: '80%', md: '70%', lg: '60%' }} ml="auto" mr="auto">

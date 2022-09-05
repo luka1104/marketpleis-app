@@ -40,13 +40,14 @@ model Wallet {
 }
 
 model Item {
-  id     Int     @id @default(autoincrement())
-  userId Int
-  name   String?
-  image  String?
-  price  String?
-  amount String?
-  user   User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id          Int     @id @default(autoincrement())
+  userId      Int
+  title       String?
+  image       String?
+  price       Int?
+  quantity    Int?
+  isPublished Boolean @default(false)
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
