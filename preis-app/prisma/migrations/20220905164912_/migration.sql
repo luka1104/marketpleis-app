@@ -36,10 +36,11 @@ CREATE TABLE "Wallet" (
 CREATE TABLE "Item" (
     "id" SERIAL NOT NULL,
     "userId" INTEGER NOT NULL,
-    "name" TEXT,
+    "title" TEXT,
     "image" TEXT,
-    "price" TEXT,
-    "amount" TEXT,
+    "price" INTEGER,
+    "quantity" INTEGER,
+    "isPublished" BOOLEAN NOT NULL DEFAULT false,
 
     CONSTRAINT "Item_pkey" PRIMARY KEY ("id")
 );
