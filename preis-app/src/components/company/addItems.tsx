@@ -10,7 +10,6 @@ import {
   Text,
 } from '@chakra-ui/react'
 import { UserContext } from '../../contexts/userContext';
-import axios from 'axios'
 import { uploadStorage } from '../../../src/libs/supabase/storage';
 import { getStorageFileURL } from '../../../src/libs/supabase/storage';
 
@@ -19,39 +18,32 @@ const AddItems = () => {
   const [title, setTitle] = useState('')
   const [price, setPrice] = useState('')
   const [quantity, setQuantity] = useState('')
-  const [image, setImage] = useState('')
+  const [image, setImage] = useState(null)
   const [url, setUrl] = useState<string>();
 
   const handleImage = useCallback((e: any) => {
-    const file = e.target.files[0]
+    const file = e.target?.files;
     setImage(file)
   }, [])
 
-  const createFromData = () => {
-    const formData = new FormData()
-    formData.append('[user_id]', currentUser.id)
-    formData.append('[title]', title)
-    formData.append('[price]', price)
-    formData.append('[quantity]', quantity)
-    formData.append('[image]', image)
-    return formData
-  }
-
   const handleSubmit = async () => {
-    console.log(image);
-    const data = await createFromData();
-    const config = {
-      headers: {
-        'content-type': 'multipart/form-data'
-      }
+    const pathname = await handleUploadStorage(image)
+    const data = {
+      'userId': currentUser.id,
+      'title': title,
+      'price': price,
+      'quantity': quantity,
+      'imagePath': pathname,
     }
-    axios.post('/api/company/postItem', data, config)
-    .then(resp => {
-      console.log(resp);
-    })
-    .catch(e => {
-      console.log(e);
-    })
+    console.log(data);
+    const resp = fetch('/api/company/postItem', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+    console.log(resp);
   }
 
   const handleUploadStorage = async (fileList: FileList | null) => {
@@ -61,6 +53,7 @@ const AddItems = () => {
       bucketName: "itemimage",
     });
     if (pathname) console.debug({ pathname });
+    return pathname;
   };
 
   const handleRenderImage = useCallback(async () => {
@@ -73,7 +66,6 @@ const AddItems = () => {
     if (!path) return;
     setUrl(path);
   }, []);
-
 
   return (
     <>
@@ -128,21 +120,6 @@ const AddItems = () => {
               }}>
               登録
             </Button>
-
-            <label htmlFor="file-upload">
-              <span>アップロードする</span>
-              <input
-                id="file-upload"
-                name="file-upload"
-                type="file"
-                className="sr-only"
-                accept="image/png, image/jpeg"
-                onChange={(e) => {
-                  const fileList = e.target?.files;
-                  handleUploadStorage(fileList);
-                }}
-              />
-            </label>
             <Button
               onClick={handleRenderImage}
               bg={'blue.400'}

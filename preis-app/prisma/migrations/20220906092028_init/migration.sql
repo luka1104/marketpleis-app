@@ -37,7 +37,7 @@ CREATE TABLE "Item" (
     "id" SERIAL NOT NULL,
     "userId" INTEGER NOT NULL,
     "title" TEXT,
-    "image" TEXT,
+    "imagePath" TEXT,
     "price" INTEGER,
     "quantity" INTEGER,
     "isPublished" BOOLEAN NOT NULL DEFAULT false,

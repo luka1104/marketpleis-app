@@ -43,7 +43,7 @@ model Item {
   id          Int     @id @default(autoincrement())
   userId      Int
   title       String?
-  image       String?
+  imagePath   String?
   price       Int?
   quantity    Int?
   isPublished Boolean @default(false)
