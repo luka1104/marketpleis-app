@@ -9,15 +9,18 @@ import {
   useColorModeValue,
   Text,
 } from '@chakra-ui/react'
+import { useRouter } from 'next/router'
+import axios from 'axios'
 import { UserContext } from '../../contexts/userContext';
 import { uploadStorage } from '../../../src/libs/supabase/storage';
 import { getStorageFileURL } from '../../../src/libs/supabase/storage';
 
 const AddItems = () => {
+  const router = useRouter();
   const { currentUser } = useContext(UserContext);
-  const [title, setTitle] = useState('')
-  const [price, setPrice] = useState('')
-  const [quantity, setQuantity] = useState('')
+  const [title, setTitle] = useState('PS5')
+  const [price, setPrice] = useState('55000')
+  const [quantity, setQuantity] = useState('100')
   const [image, setImage] = useState(null)
   const [url, setUrl] = useState<string>();
 
@@ -35,15 +38,16 @@ const AddItems = () => {
       'quantity': quantity,
       'imagePath': pathname,
     }
-    console.log(data);
-    const resp = fetch('/api/company/postItem', {
-      method: 'POST',
+    const config = {
       headers: {
         'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
-    console.log(resp);
+      }
+    }
+    console.log(data);
+    const resp = await axios.post('/api/company/postItem', data, config)
+    if(resp.status !== 200) {
+      throw Error("Server error");
+    }
   }
 
   const handleUploadStorage = async (fileList: FileList | null) => {
@@ -57,7 +61,7 @@ const AddItems = () => {
   };
 
   const handleRenderImage = useCallback(async () => {
-    const src = "141662c0-fa6a-4b05-8d90-b38afa29d132"
+    const src = "b1e3991d-7ed4-4d78-951e-d1258039eea8"
     if (!src) return;
     const path = await getStorageFileURL({
       bucketName: "itemimage",
@@ -85,6 +89,7 @@ const AddItems = () => {
             <FormLabel>商品名</FormLabel>
             <Input
               type="text"
+              value={title}
               onChange={(e) => {setTitle(e.target.value)}}
             />
           </FormControl>
@@ -92,6 +97,7 @@ const AddItems = () => {
             <FormLabel>販売価格</FormLabel>
             <Input
               type="number"
+              value={price}
               onChange={(e) => {setPrice(e.target.value)}}
             />
           </FormControl>
@@ -99,6 +105,7 @@ const AddItems = () => {
             <FormLabel>販売予定数量</FormLabel>
             <Input
               type="number"
+              value={quantity}
               onChange={(e) => {setQuantity(e.target.value)}}
             />
           </FormControl>
@@ -120,16 +127,6 @@ const AddItems = () => {
               }}>
               登録
             </Button>
-            <Button
-              onClick={handleRenderImage}
-              bg={'blue.400'}
-              color={'white'}
-              _hover={{
-                bg: 'blue.500',
-              }}>
-              登録
-            </Button>
-            <img src={url} alt="ps5"/>
           </Stack>
         </Stack>
       </Box>
