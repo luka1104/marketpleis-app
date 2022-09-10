@@ -19,10 +19,16 @@ const options = {
         signIn: '/signin'
     },
     callbacks: {
-        async session({ session, user, token }) {
-          session.user.id = user.id;
-          return session;
-        },
+        async session({session, user}) {
+          session = {
+              ...session,
+              user: {
+                  id: user.id,
+                  ...session.user
+              }
+          }
+          return session
+        }
     },
     secret: 'secret',
 }
