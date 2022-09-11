@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react'
-import { getStorageFileURL } from '../../../src/libs/supabase/storage';
+import { getStorageFileURL } from '../../src/libs/supabase/storage';
 import {
   Input,
   Button,
@@ -19,7 +19,7 @@ import {
 } from '@chakra-ui/react'
 import axios from 'axios'
 
-const PostedItem = (props: any) => {
+const ItemCard = (props: any) => {
   const [url, setUrl] = useState('')
 
   const handleRenderImage = useCallback(async () => {
@@ -63,15 +63,6 @@ const PostedItem = (props: any) => {
           rounded="lg"
           shadow="lg"
           position="relative">
-          {props.item.isPublished && (
-            <Circle
-              size="10px"
-              position="absolute"
-              top={2}
-              right={2}
-              bg="red.200"
-            />
-          )}
 
           <Image
             src={url}
@@ -80,13 +71,6 @@ const PostedItem = (props: any) => {
           />
 
           <Box p="6">
-            <Box display="flex" alignItems="baseline">
-              {props.item.isPublished && (
-                <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
-                  公開中
-                </Badge>
-              )}
-            </Box>
             <Flex mt="1" justifyContent="space-between" alignContent="center">
               <Box
                 fontSize="2xl"
@@ -111,22 +95,11 @@ const PostedItem = (props: any) => {
                   </Box>
                 </Text>
               </Box>
-              <Button>
-                編集
-              </Button>
-              {props.item.isPublished ? (
-                <Button
-                onClick={() => {handlePublish(false)}}
-               >
-                 取り下げ
-               </Button>
-              ) : (
-                <Button
+              <Button
                  onClick={() => {handlePublish(true)}}
                 >
-                  公開
+                  エントリー
                 </Button>
-              )}
             </Flex>
           </Box>
         </Box>
@@ -135,4 +108,4 @@ const PostedItem = (props: any) => {
   )
 }
 
-export default PostedItem
+export default ItemCard
