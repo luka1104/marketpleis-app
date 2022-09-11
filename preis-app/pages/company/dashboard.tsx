@@ -6,6 +6,9 @@ import type { GetServerSideProps } from "next";
 import prisma from '../../lib/prisma'
 import { UserContext } from '../../src/contexts/userContext';
 import { useSession } from "../../sdk/next-auth/react"
+import {
+  Grid,
+} from '@chakra-ui/react'
 
 type Props = {
   users: any;
@@ -46,15 +49,17 @@ const Dashboard = (props: any) => {
         <Navbar />
         dashboard
         <AddItems />
-        {//@ts-ignore
-        items.map((val: any, key: any) => {
-          return (
-            <PostedItem
-              item={val}
-              key={key}
-            />
-          )
-        })}
+        <Grid gridTemplateColumns={{sm: 'repeat(1, 1fr)', md: 'repeat(2, 1fr)', lg: 'repeat(3, 1fr)'}} gap={6}>
+          {//@ts-ignore
+          items.map((val: any, key: any) => {
+            return (
+              <PostedItem
+                item={val}
+                key={key}
+              />
+            )
+          })}
+        </Grid>
       </div>
     )
   }
