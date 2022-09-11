@@ -49,13 +49,26 @@ model Item {
   isPublished Boolean   @default(false)
   user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   lottery     Lottery[]
+  FCFS        FCFS[]
 }
 
 model Lottery {
   id           Int      @id @default(autoincrement())
   itemId       Int
   participants String[]
+  minters      String[]
+  quantity     Int
+  deadline     DateTime
   item         Item     @relation(fields: [itemId], references: [id], onDelete: Cascade)
+}
+
+model FCFS {
+  id       Int      @id @default(autoincrement())
+  itemId   Int
+  minters  String[]
+  quantity Int
+  deadline DateTime
+  item     Item     @relation(fields: [itemId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
