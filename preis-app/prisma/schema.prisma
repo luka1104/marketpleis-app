@@ -40,14 +40,22 @@ model Wallet {
 }
 
 model Item {
-  id          Int     @id @default(autoincrement())
+  id          Int       @id @default(autoincrement())
   userId      Int
   title       String?
   imagePath   String?
   price       Int?
   quantity    Int?
-  isPublished Boolean @default(false)
-  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  isPublished Boolean   @default(false)
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lottery     Lottery[]
+}
+
+model Lottery {
+  id           Int      @id @default(autoincrement())
+  itemId       Int
+  participants String[]
+  item         Item     @relation(fields: [itemId], references: [id], onDelete: Cascade)
 }
 
 model VerificationToken {
