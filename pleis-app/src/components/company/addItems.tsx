@@ -44,10 +44,21 @@ const AddItems = () => {
       }
     }
     console.log(data);
-    const resp = await axios.post('/api/company/postItem', data, config)
-    if(resp.status !== 200) {
-      throw Error("Server error");
-    }
+    return new Promise((resolve, reject) => {
+      axios.post('/api/company/postItem', data, config)
+      .then(response => {
+        if(response.status !== 200) {
+          throw Error("Server error");
+        }
+        console.log('reload');
+        router.reload();
+        resolve(response);
+      })
+      .catch(e => {
+        reject(e);
+        throw Error("Server error:" + e);
+      })
+    });
   }
 
   const handleUploadStorage = async (fileList: FileList | null) => {
@@ -59,17 +70,6 @@ const AddItems = () => {
     if (pathname) console.debug({ pathname });
     return pathname;
   };
-
-  const handleRenderImage = useCallback(async () => {
-    const src = "b1e3991d-7ed4-4d78-951e-d1258039eea8"
-    if (!src) return;
-    const path = await getStorageFileURL({
-      bucketName: "itemimage",
-      pathName: src,
-    });
-    if (!path) return;
-    setUrl(path);
-  }, []);
 
   return (
     <>

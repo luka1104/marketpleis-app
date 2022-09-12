@@ -35,12 +35,8 @@ const Dashboard = (props: any) => {
   if(status) {
     //@ts-ignore
     const user = props.users.find(u => u.email === session?.user?.email)
-    // console.log(props.users);
     //@ts-ignore
     const items = props.items.filter(i => i.userId === session?.user?.id)
-    // console.log(items);
-    // console.log(session);
-    // console.log(props.items);
     if(!currentUser) {
       setCurrentUser(user);
     }
@@ -68,15 +64,6 @@ const Dashboard = (props: any) => {
       <Navbar />
       dashboard
       <AddItems />
-      {/* {//@ts-ignore
-      items.map((val: any, key: any) => {
-        return (
-          <PostedItem
-            item={val}
-            key={key}
-          />
-        )
-      })} */}
     </div>
   )
 }

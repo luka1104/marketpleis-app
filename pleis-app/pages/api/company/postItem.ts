@@ -36,9 +36,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const resp = await postItem(data)
   console.log(resp);
   if(resp) {
-      res.status(200)
+      res.status(200).json({"message":"Added successfully"})
   } else {
-      res.status(500)
+      res.status(500).json({"message":"Sorry, Something went wrong"})
   }
 };
 export default handler;
