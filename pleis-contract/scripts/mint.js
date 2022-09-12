@@ -49,10 +49,10 @@ async function mintNFT(tokenURI) {
 }
 
 mintNFT(
-  {
+  JSON.stringify({
     "name": "The right ticket for purchasing PS5",
     "title": "PS5",
     "price": "55000",
     "holderName": "Pleis Tarou"
-  }
+  })
 )
